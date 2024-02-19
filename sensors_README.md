@@ -66,13 +66,14 @@ This allows ROS2 and built packages to be run as soon as you open any new termin
 
 ## Dependencies:
 
-## repositories:
-  ## core
-  core/autoware_common:
-    type: git
-    url: https://github.com/autowarefoundation/autoware_common.git
-    version: main
-  core/Velodyne Lidar:
-    type: git
-    url: https://github.com/ros-drivers/velodyne/tree/ros2
-    version: main
+### repositories:
+ &ensp;core: <br>
+    &ensp;&ensp;core/autoware_common: <br>
+      &ensp;&ensp;&ensp;type: git <br>
+      &ensp;&ensp;&ensp;url: https://github.com/autowarefoundation/autoware_common.git <br>
+      &ensp;&ensp;&ensp;version: main <br>
+    &ensp;&ensp;core/Velodyne Lidar: <br>
+      &ensp;&ensp;&ensp;type: git<br>
+      &ensp;&ensp;&ensp;url: https://github.com/ros-drivers/velodyne/tree/ros2 <br>
+      &ensp;&ensp;&ensp;version: main<br>
+      
