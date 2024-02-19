@@ -64,10 +64,10 @@ source install/setup.bash
 Save the file and exit the nano
 This allows ROS2 and built packages to be run as soon as you open any new terminal
 
-Dependencies:
+## Dependencies:
 
-repositories:
-  # core
+## repositories:
+  ## core
   core/autoware_common:
     type: git
     url: https://github.com/autowarefoundation/autoware_common.git
