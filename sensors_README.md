@@ -36,7 +36,7 @@ ros2 run rviz2 rviz2
 <img width="688" alt="Screenshot 2024-02-19 004908" src="https://github.com/JACart2/jacart2_documentation/assets/113935478/733bd588-d0ec-4cfc-8af6-7acf889d865d">
 
 - Click add.  Click by topic. then select the Velodyne points to be added
-- Change map frame to Velodyne
+- Where it says fixed frame change map to the word Velodyne
 - You may echo as well to see the raw packets:
   ```
   ros2 echo velodyne_driver velodyne_driver_node_VLP16-launch.py
