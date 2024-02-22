@@ -12,13 +12,13 @@ Follow these instructions to install ROS2:
 ### Installing the Velodyne Drivers
 1. Locate or create a `dev_ws/` directory.
 2. Create a `src` folder inside it.
-3. Clone the Velodyne Lidar GitHub repository into your workspace to use the ROS2 version of this driver.
+3. Install Velodyne Driver from the repositories by running.
 ```
-git clone -b ros2  --single-branch https://github.com/ros-drivers/velodyne.git
+sudo apt-get install ros-humble-velodyne
 ```
-This copies the Velodyne Lidar GitHub into your workspace and allows you to proceed to the next step and interpret data from the lidar. 
-We want to use the ros2 version of this driver as we’re running it in conjunction with the other team on ros2.
-
+This installs the Velodyne stack into your workspace and allows you to proceed to the next step and interpret data from the lidar. 
+We want to use the ros2 version of this driver as we’re running it in conjunction with the other team on ROS2.
+[Veloyne ROS WIKI](https://wiki.ros.org/velodyne)
 ### RVIZ Steps to See Velodyne Raw Data After Installation
 1. Begin by turning on the battery, and plugging in the laptop and ethernet (blue cable).
 2. Run the following in the terminal to connect to the Lidar.
