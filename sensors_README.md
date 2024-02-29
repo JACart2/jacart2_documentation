@@ -83,3 +83,86 @@ Here are the repositories and their respective dependencies required for this pr
  - Type: git
  - URL: https://github.com/ros-drivers/velodyne/tree/ros2
  - Version: main
+   
+# ZED Camera Setup WIP
+### Prerequisites
+- [Ubuntu 22.04](https://releases.ubuntu.com/jammy/)
+- [ROS2 Humble](https://docs.ros.org/en/humble/Installation/Ubuntu-Install-Debians.html)
+## Install CUDA 
+1. [Download CUDA Toolkit 12.3](https://developer.nvidia.com/cuda-downloads)
+   To see what Ubuntu release you are running by doing
+   ```
+   lsb_release -a
+   ```
+   Select the following options for lab laptops
+   - Operating System: Linux
+   - Architecture: x86_64
+   - Distribution: Ubuntu
+   - Version: 22.04
+   - Installer Type: deb (network)
+3. Base Installer
+```
+wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/x86_64/cuda-keyring_1.1-1_all.deb
+sudo dpkg -i cuda-keyring_1.1-1_all.deb
+sudo apt-get update
+sudo apt-get -y install cuda-toolkit-12-3
+```
+3. Driver Installer
+```
+sudo apt-get install -y cuda-drivers
+```
+## Install ZED SDK
+1. Download [ZED SDK](https://www.stereolabs.com/developers/release) for Ubuntu 22 4.0.8
+2. Go to the folder where the installer has been downloaded
+```
+cd Downloads
+```
+3. Install zstd to run installer
+```
+sudo apt install zstd
+```
+4. Add execution permission to the installer using the `chmod +x` command
+```
+chmod +x ZED_SDK_Ubuntu22_cuda12.1_v4.0.8.zstd.run
+```
+5. Run the ZED SDK installer
+```
+./ZED_SDK_Ubuntu22_cuda11.8_v4.0.0.zstd.run
+```
+## Install ZED ROS2 Wrapper
+### Prerequisites
+- Ubuntu 22.04 (Jammy Jellyfish)
+- ZED SDK v4.0 or later
+- CUDA dependency
+- ROS 2 Humble Hawksbill:
+  ### Note
+  The zed-ros2-wrapper repository contains the repository zed-ros2-interfaces as a sub-module. zed-ros2-    interfaces contains the definitions of the custom topics and custom services.
+1. Open a terminal and move to your `src` folder of your workspace
+```
+cd dev_ws/src
+```
+2. Clone `zed-ros2-wrapper` github
+```
+git clone --recursive https://github.com/stereolabs/zed-ros2-wrapper.git
+```
+3. Move back to dev_ws
+```
+cd ..
+```
+4. Update
+```
+sudo apt update
+```
+5. Install the required dependencies
+```
+rosdep install --from-paths src --ignore-src -r -y
+```
+6. Build the wrapper, you can save time by only building the packages in the `zed-ros2-wrapper` folder by doing `--packages-select`
+```
+colcon build --symlink-install --cmake-args=-DCMAKE_BUILD_TYPE=Release
+``` 
+7. Setup the environment variables
+```
+echo source $(pwd)/install/local_setup.bash >> ~/.bashrc
+source ~/.bashrc
+```
