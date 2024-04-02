@@ -54,11 +54,16 @@ git clone https://github.com/rsasaki0109/ndt_omp_ros2
 cd ...
 colcon build --symlink-install
 ```
-## Localization DEMO.
+## Localization DEMO
+If you're using the launch.py file
 ```
 ros2 launch localization_launch localization_full_launcher.launch.py
 ```
-
+Otherwise
+```
+rviz2 -d src/lidar_localization_ros2/rviz/localization.rviz
+ros2 launch lidar_localization_ros2 lidar_localization.launch.py
+```
 ### Source Install Package/Bash File
 1. Open your `.bashrc` file in nano.
 ```
