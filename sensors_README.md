@@ -135,7 +135,7 @@ python3 get_python_api.py
 - CUDA dependency
 - ROS 2 Humble Hawksbill:
   ### Note
-  The zed-ros2-wrapper repository contains the repository zed-ros2-interfaces as a sub-module. zed-ros2-    interfaces contains the definitions of the custom topics and custom services.
+  The [zed-ros2-wrapper](https://github.com/stereolabs/zed-ros2-wrapper) repository contains the repository zed-ros2-interfaces as a sub-module. zed-ros2-    interfaces contains the definitions of the custom topics and custom services.
 1. Open a terminal and move to your `src` folder of your workspace
 ```
 cd dev_ws/src
@@ -166,7 +166,7 @@ echo source $(pwd)/install/local_setup.bash >> ~/.bashrc
 source ~/.bashrc
 ```
 # Object Detection
-The zed-ros-examples repository is a collection of colcon packages for various tasks.
+The [zed-ros-examples](https://github.com/stereolabs/zed-ros2-examples#build-the-package) repository is a collection of colcon packages for various tasks.
 ```
 cd ~/dev_ws/src/
 git clone https://github.com/stereolabs/zed-ros2-examples.git
