@@ -42,22 +42,22 @@ ros2 run rviz2 rviz2
   ros2 echo velodyne_driver velodyne_driver_node_VLP16-launch.py
   ```
 
-### Installing the Autoware.Universe
-1. Navigate into the `dev_ws/src` directory.
-2. Follow this tutorial until you reach step 2: [Autoware Source Installation](https://autowarefoundation.github.io/autoware-documentation/main/installation/autoware/source-installation/)
-3. Once you reach step 2, execute the first command:
+### Installing Rsasaki's Lidar Localizalton.
+1. Clone the required repositories in src
 ```
-source /opt/ros/humble/setup.bash
+cd /dev_ws/src
+git clone https://github.com/rsasaki0109/lidar_localization_ros2
+git clone https://github.com/rsasaki0109/ndt_omp_ros2
 ```
-4. Then, execute this command instead of the second command mentioned in the tutorial:
+2. Build the workspace in /dev_ws
 ```
-rosdep install -y --from-paths src --ignore-src --rosdistro humble --os=ubuntu:jammy
+cd ...
+colcon build --symlink-install
 ```
-5. Next, run the following command in your terminal to build the packages, allowing only one to be built at a time to avoid crashes. This process can take over an hour.
+## Localization DEMO.
 ```
-colcon build --packages-ignore ament_cmake_core ament_cmake_export_definitions … --parallel-workers 1
+ros2 launch localization_launch localization_full_launcher.launch.py
 ```
-Make sure you're running `colcon build` in the `dev_ws` directory and not any of its child directories.
 
 ### Source Install Package/Bash File
 1. Open your `.bashrc` file in nano.
@@ -70,19 +70,6 @@ source /opt/ros/humble/setup.bash
 source install/setup.bash
 ```
 3. Save the file and exit nano. This allows ROS2 and built packages to be run as soon as you open any new terminal.
-
-## Dependencies
-Here are the repositories and their respective dependencies required for this project:
-
-- **Core**
-- **autoware_common**
- - Type: git
- - URL: https://github.com/autowarefoundation/autoware_common.git
- - Version: main
-- **Velodyne Lidar**
- - Type: git
- - URL: https://github.com/ros-drivers/velodyne/tree/ros2
- - Version: main
    
 # ZED Camera Setup
 ### Prerequisites
