@@ -84,7 +84,7 @@ Here are the repositories and their respective dependencies required for this pr
  - URL: https://github.com/ros-drivers/velodyne/tree/ros2
  - Version: main
    
-# ZED Camera Setup WIP
+# ZED Camera Setup
 ### Prerequisites
 - [Ubuntu 22.04](https://releases.ubuntu.com/jammy/)
 - [ROS2 Humble](https://docs.ros.org/en/humble/Installation/Ubuntu-Install-Debians.html)
@@ -127,7 +127,14 @@ chmod +x ZED_SDK_Ubuntu22_cuda12.1_v4.0.8.zstd.run
 ```
 5. Run the ZED SDK installer
 ```
-./ZED_SDK_Ubuntu22_cuda11.8_v4.0.0.zstd.run
+./ZED_SDK_Ubuntu22_cuda12.1_v4.0.8.zstd.run
+```
+## Install ZED Python API
+The Python install script is located in /usr/local/zed/.
+Run the script:
+```
+cd "/usr/local/zed/"
+python3 get_python_api.py
 ```
 ## Install ZED ROS2 Wrapper
 ### Prerequisites
@@ -166,3 +173,22 @@ colcon build --symlink-install --cmake-args=-DCMAKE_BUILD_TYPE=Release
 echo source $(pwd)/install/local_setup.bash >> ~/.bashrc
 source ~/.bashrc
 ```
+# Object Detection
+The zed-ros-examples repository is a collection of colcon packages for various tasks.
+```
+cd ~/dev_ws/src/
+git clone https://github.com/stereolabs/zed-ros2-examples.git
+cd ../
+sudo apt update
+rosdep update
+rosdep install --from-paths src --ignore-src -r -y
+colcon build --symlink-install --cmake-args=-DCMAKE_BUILD_TYPE=Release
+source ~/.bashrc
+```
+### Enable Object Detection
+Object detection can be started automatically by setting the parameter `object_detection.od_enabled` to `true` in the file `common.yaml`
+### Launching with RVIZ2
+```
+ros2 launch zed_display_rviz2 display_zed_cam.launch.py camera_model:=<camera_model>
+```
+Replace `<camera_model>` with your camera model: `zedm`, `zed2`, `zed2i`, `zedx`, `zedxm`.
