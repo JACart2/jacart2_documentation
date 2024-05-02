@@ -25,7 +25,7 @@ cd ..
 The following steps are to actually run the code on the golf cart itself or in the simulator.
 The cart should start outside at the origin point.
 
-**(A)** Turn on the cart and connect the laptop via the USB-C cable located in the rear of the cart. 
+**(A)** Turn on the cart and connect the laptop via the USB-C cable, HDMI, and ethernet located in the rear of the cart. 
 
 **(B)** Run the one singular launch file **or** all node launch files
 ```
