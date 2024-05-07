@@ -165,8 +165,13 @@ colcon build --symlink-install --cmake-args=-DCMAKE_BUILD_TYPE=Release
 echo source $(pwd)/install/local_setup.bash >> ~/.bashrc
 source ~/.bashrc
 ```
-# Object Detection
-The [zed-ros-examples](https://github.com/stereolabs/zed-ros2-examples#build-the-package) repository is a collection of colcon packages for various tasks.
+## Object Detection
+### Enable Object Detection
+Object detection can be started automatically by setting the parameter `object_detection.od_enabled` to `true` in the file `common.yaml` from `zed-ros2-wrapper`.
+To vizualize results of object detection, the ROS2 plugin for ZED2 is required, provided in next step.
+## Multi-Camera Launch
+### Download zed-ros2-examples
+The [zed-ros-examples](https://github.com/stereolabs/zed-ros2-examples#build-the-package) repository is a collection of colcon packages for various tasks, including launching multiple cameras, and the ROS2 plugin for vizualizing object detection data in RVIZ2.
 ```
 cd ~/dev_ws/src/
 git clone https://github.com/stereolabs/zed-ros2-examples.git
@@ -177,10 +182,29 @@ rosdep install --from-paths src --ignore-src -r -y
 colcon build --symlink-install --cmake-args=-DCMAKE_BUILD_TYPE=Release
 source ~/.bashrc
 ```
-### Enable Object Detection
-Object detection can be started automatically by setting the parameter `object_detection.od_enabled` to `true` in the file `common.yaml`
-### Launching with RVIZ2
+Use the package [`zed_multi_camera`](https://github.com/stereolabs/zed-ros2-examples/tree/master/tutorials/zed_multi_camera) from the path `zed-ros2-examples/tutorials/zed_multi_camera/` as a starting point.
+For correct transformations, modify `zed_multi_camera.launch.py` to ensure:
 ```
-ros2 launch zed_display_rviz2 display_zed_cam.launch.py camera_model:=<camera_model>
+publish_tf = 'false'
 ```
-Replace `<camera_model>` with your camera model: `zedm`, `zed2`, `zed2i`, `zedx`, `zedxm`.
+### ZED Multi Camera URDF Congifuration
+Inside this file, the position of each camera is in relation to a reference link. More documenation for further configuration can be found [here](https://github.com/stereolabs/zed-ros2-examples/tree/master/tutorials/zed_multi_camera#the-multi-camera-urdf)
+### Launch Parameters
+- cam_names
+- cam_models
+- cam_serials
+- disable_tf
+
+Further documentation on the parameters found [here](https://github.com/stereolabs/zed-ros2-examples/tree/master/tutorials/zed_multi_camera#launch-parameters).
+### Running the Launch File
+Camera model and serial number found with command:
+```
+ZED_Explorer --all
+```
+Launch Command:
+```
+ros2 launch zed_multi_camera zed_multi_camera.launch.py cam_names:='[zed_front,zed_rear]' cam_models:='[<front_camera_model>,<rear_camera_model>]' cam_serials:='[<front_camera_serial>,<rear_camera_serial>]'
+```
+- Replace `<front_camera_model>` and `<rear_camera_model>` with each camera model:
+  - `zedm`, `zed2`, `zed2i`, `zedx`, or `zedxm`
+- Replace `<front_camera_serial>` and `<rear_camera_serial>` with the serial number for each camera
