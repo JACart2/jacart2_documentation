@@ -41,40 +41,53 @@ ros2 run rviz2 rviz2
   ```
   ros2 echo velodyne_driver velodyne_driver_node_VLP16-launch.py
   ```
-
-### Installing Rsasaki's Lidar Localizalton.
-1. Clone the required repositories in src
+### Installing the Localization Package
+1. Navigate into the `dev_ws/src` directory.
 ```
-cd /dev_ws/src
-git clone https://github.com/rsasaki0109/lidar_localization_ros2
-git clone https://github.com/rsasaki0109/ndt_omp_ros2
+cd dev_ws/src/
 ```
-2. Build the workspace in /dev_ws
+2. Run these commands 
 ```
-cd ...
+git clone https://github.com/rsasaki0109/lidar_localization_ros2.git
+git clone https://github.com/rsasaki0109/ndt_omp_ros2.git
+```
+3. Go back into the previous directory. `dev_ws` 
+```
+cd ..
+```
+4. Build the Packages by running this command in the console
+```
 colcon build --symlink-install
 ```
-## Localization DEMO
-If you're using the launch.py file
+Make sure you're running `colcon build` in the `dev_ws` directory and not any of its child directories as it will not work otherwise!
+
+
+### Running the Localization Script
+Make sure you have 
+If the Ai-Navigation Github respository has already been cloned into your `dev_ws/src` and built in `dev_ws` ignore step one, two, and three
+1. Navigate into the `dev_ws/src` folder
+```
+cd dev_ws/src
+```
+2. Install the JACART Ai-Navigation Package
+```
+git clone https://github.com/JACart2/ai-navigation.git
+```
+3. Build the ai navigation package
+```
+colcon build --symlink-install --packages-select ai-navigation
+```
+4. Change into the `dev_ws` and source your workspace
+```
+cd dev_ws
+source install/setup.bash
+```
+5. Run the localization command which will bring up the localization required packages
 ```
 ros2 launch localization_launch localization_full_launcher.launch.py
 ```
-Otherwise
-```
-rviz2 -d src/lidar_localization_ros2/rviz/localization.rviz
-ros2 launch lidar_localization_ros2 lidar_localization.launch.py
-```
-### Source Install Package/Bash File
-1. Open your `.bashrc` file in nano.
-```
-nano ~/.bashrc
-```
-2. Paste the following at the bottom of the file:
-```
-source /opt/ros/humble/setup.bash
-source install/setup.bash
-```
-3. Save the file and exit nano. This allows ROS2 and built packages to be run as soon as you open any new terminal.
+6. Using the 2d pose estimator.  Give the RVIZ once it has loaded the map the initial position of the cart
+7. Drive and Localize
    
 # ZED Camera Setup
 ### Prerequisites
