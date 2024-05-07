@@ -7,7 +7,7 @@ For the steps below to work, you must possess Sudo privileges.
 
 ### Installing ROS2
 Follow these instructions to install ROS2:
-[ROS2 Ubuntu Development Setup]([https://docs.ros.org/en/humble/Installation/Alternatives/Ubuntu-Development-Setup.html](https://docs.ros.org/en/humble/Installation/Ubuntu-Install-Debians.html))
+[ROS2 Ubuntu Development Setup](https://docs.ros.org/en/humble/Installation/Ubuntu-Install-Debians.html)
 
 ### Installing the Velodyne Drivers
 1. Locate or create a `dev_ws/` directory.
