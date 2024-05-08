@@ -61,7 +61,6 @@ colcon build --symlink-install
 ```
 Make sure you're running `colcon build` in the `dev_ws` directory and not any of its child directories as it will not work otherwise!
 
-
 ### Running the Localization Script
 Make sure you have 
 If the Ai-Navigation Github respository has already been cloned into your `dev_ws/src` and built in `dev_ws` ignore step one, two, and three
@@ -88,7 +87,58 @@ ros2 launch localization_launch localization_full_launcher.launch.py
 ```
 6. Using the 2d pose estimator.  Give the RVIZ once it has loaded the map the initial position of the cart
 7. Drive and Localize
-   
+
+## Install LiDAR-SLAM package
+1. Navigate into dev_ws/src director
+```
+cd dev_ws/src
+```
+2. Clone the git repository of the package
+```
+git clone https://github.com/rsasaki0109/lidarslam_ros2
+```
+3. Go in and Delete the third party folder in the package
+```
+cd lidarslam_ros2
+rm /Thirdyparty -r
+```
+4. Build the package (Make sure you're in dev_ws directory, not any of its child directories)
+```
+cd ..
+cd ..
+colcon build --symlink-install --cmake-args -DCMAKE_BUILD_TYPE=Release
+```
+## Running lidar_slam (Launch file in progress)
+1. Run the velodyne driver
+```
+ros2 launch velodyne_driver velodyne_driver_node-VLP16-launch.py 
+```
+2. Run the velodyne pointcloud
+```
+ros2 launch velodyne_pointcloud velodyne_transform_node-VLP16-launch.py
+```
+3. Create a static transform from base_link to velodyne
+```
+ros2 run tf2_ros static_transform_publisher 1 1 0 0 0 1 base_link velodyne
+```
+4. Run the lidar launch file
+```
+ros2 launch lidarslam lidarslam.launch.py
+```
+5. Now go around with the cart and when you're ready, save the map!
+### Saving a map
+1. Run the map save service call
+```
+ros2 service call /map_save std_srvs/Empty
+```
+2. The map is saved in the dev_ws folder
+3. To view the map install then use pcl_viewer
+```
+sudo apt-get install pcl-tools # use if not installed
+```
+```
+pcl_viewer -multiview 1 <pcd_filepath> # grab file path from properties then tab complete
+```
 # ZED Camera Setup
 ### Prerequisites
 - [Ubuntu 22.04](https://releases.ubuntu.com/jammy/)
@@ -221,3 +271,5 @@ ros2 launch zed_multi_camera zed_multi_camera.launch.py cam_names:='[zed_front,z
 - Replace `<front_camera_model>` and `<rear_camera_model>` with each camera model:
   - `zedm`, `zed2`, `zed2i`, `zedx`, or `zedxm`
 - Replace `<front_camera_serial>` and `<rear_camera_serial>` with the serial number for each camera
+
+
