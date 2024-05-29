@@ -5,7 +5,7 @@ You must follow these steps in order, as they appear.
 ## Step 1: Install/Setup
 The following steps are to install all necessary packages and dependencies for use later on.
 
-**(A)** Ensure [ROS2 humble](https://docs.ros.org/en/humble/Installation/Alternatives/Ubuntu-Development-Setup.html) is installed on your machine and navigate to ~/dev_ws/src by either creating the directory or going into a premade one.
+**(A)** Ensure [ROS2 humble](https://docs.ros.org/en/humble/Installation/Ubuntu-Install-Debians.html) is installed on your machine and navigate to ~/dev_ws/src by either creating the directory or going into a premade one.
 ```
 cd ~
 mkdir -p dev_ws/src
