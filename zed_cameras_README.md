@@ -12,13 +12,19 @@ Different camera setups will require variations on this command.
 
 ## Reading Output
 
-The ZED cameras have a lot of different ways that their output can be interpreted. All of them are published as ros2 nodes, and the data can then be manipulated from our end.
+The ZED cameras have a lot of different ways that their output can be interpreted. All of them are published to ros2 topics, and the data can then be manipulated from our end.
 
-For example, a simple non-stereo image that can be displayed in Rviz can be found under the topic (under the default James configuration)
+For example, a simple non-stereo image that can be displayed in Rviz can be found under the topic (under the default James launchfile configuration)
 ```
-zed_node/zed/zed_node_0/left_raw/image_raw_color
+zed_front/zed_node_0/left_raw/image_raw_color
 ```
-(To add this to Rviz, click 'Add', then 'By Topic', then select this topic. Make sure to select the "Image" display option, not the "Camera" one)
+(To add this to Rviz, click 'Add', then 'By topic', then select this topic. Make sure to select the "Image" display option, not the "Camera" one)
+
+When hooked up to a system with multiple cameras, these should follow the form of:
+```
+{NAME}/zed_node_{INDEX}/....
+```
+where NAME is the name of the camera provided to the launchfile, and INDEX is the index of that specific camera in the launchfile's array parameters.
 
 ## Past Problems
 This section is meant to warn of possible problems with work on the cart based on ones already encountered.
