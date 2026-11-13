@@ -76,7 +76,7 @@ Fill in exact tags when releasing. The "Current head" column reflects the projec
 |Repository|Current head|Release tag|
 |-|-|-|
 |`ai-navigation`|`main`|`v1.X.Y` (TBD)|
-|`docker_files`|`fall26-bag_file_ui`|`v1.X.Y` (TBD)|
+|`docker_files`|`fall26`|`v1.X.Y` (TBD)|
 |`ui`|`main`|`v1.X.Y` (TBD)|
 |`dashboard`|`main`|`v1.X.Y` (TBD)|
 |`anomaly_detection`|`fall26`|`v1.X.Y` (TBD)|
