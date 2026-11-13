@@ -4,8 +4,8 @@ JACart2 spans several repositories that must be deployed together. Versions foll
 
 |Version range|Localization backend|Status|
 |-|-|-|
-|**`0.X.Y`**|Original LiDAR localization (no MOLA), using `lidar\_localization\_ros2`|Frozen (reference only)|
-|**`1.X.Y`**|MOLA LiDAR localization and mapping (MRPT / `mola\_\*` ROS packages)|**Active**|
+|**`0.X.Y`**|Original LiDAR localization (no MOLA), using `lidar_localization_ros2`|Frozen (reference only)|
+|**`1.X.Y`**|MOLA LiDAR localization and mapping (MRPT / `mola_\*` ROS packages)|**Active**|
 
 All active development targets `1.X.Y`. The `0.X.Y` series is preserved so the pre-MOLA system can be reproduced, but it receives no new features or fixes.
 
@@ -18,10 +18,10 @@ All active development targets `1.X.Y`. The `0.X.Y` series is preserved so the p
 |Repository|Role|Differs between 0.X.Y and 1.X.Y?|
 |-|-|-|
 |`ai-navigation`|ROS 2 navigation, localization launch files, cart configs|**Yes** (localization, launch, map/calibration files)|
-|`docker\_files`|Docker images, compose files, launcher scripts|**Yes** (backend image packages, MOLA dependencies, map downloads)|
+|`docker_files`|Docker images, compose files, launcher scripts|**Yes** (backend image packages, MOLA dependencies, map downloads)|
 |`ui`|Passenger-facing interface|Mostly no|
 |`dashboard`|Remote monitoring dashboard|No|
-|`anomaly\_detection`|AI anomaly detection, bag tools, offline evaluation|No (understands MOLA health messages)|
+|`anomaly_detection`|AI anomaly detection, bag tools, offline evaluation|No (understands MOLA health messages)|
 
 Every repository uses the same version scheme and is tagged `vMAJOR.MINOR.PATCH`.
 
@@ -55,12 +55,12 @@ All repositories on a cart must share the same **MAJOR.MINOR**. PATCH versions m
 |-|-|
 |Active development|`main` (after the migration below)|
 |Feature work|`<author>/<short-description>`|
-|Term/season integration branches|`<topic>\_<season><yy>` (e.g. `fall26`)|
+|Term/season integration branches|`<topic>_<season><yy>` (e.g. `fall26`)|
 |Release tag|`vMAJOR.MINOR.PATCH`|
-|Whole-cart release|`suite-vMAJOR.MINOR.PATCH` on `docker\_files`|
+|Whole-cart release|`suite-vMAJOR.MINOR.PATCH` on `docker_files`|
 |Frozen classic reference|`release/0.x` branch and the final `v0.X.Y` tag|
 
-> \*\*Migration note:\*\* historical branches do not follow this scheme. Current MOLA work lives on `mola\_main\_sum26` (and `fall26\*` for anomaly detection), while `main` in `ai-navigation`, `ui`, and `docker\_files` predates the MOLA integration. To migrate:
+> \*\*Migration note:\*\* historical branches do not follow this scheme. Current MOLA work lives on `mola_main_sum26` (and `fall26\*` for anomaly detection), while `main` in `ai-navigation`, `ui`, and `docker_files` predates the MOLA integration. To migrate:
 > 1. Tag the existing `main` with the final classic version (`v0.X.Y`) and create `release/0.x` from it.
 > 2. Merge the MOLA branches into `main`.
 > 3. Tag the result `v1.0.0`.
@@ -76,17 +76,17 @@ Fill in exact tags when releasing. The "Current head" column reflects the projec
 |Repository|Current head|Release tag|
 |-|-|-|
 |`ai-navigation`|`main`|`v1.X.Y` (TBD)|
-|`docker\_files`|`fall26-bag\_file\_ui`|`v1.X.Y` (TBD)|
+|`docker_files`|`fall26-bag_file_ui`|`v1.X.Y` (TBD)|
 |`ui`|`main`|`v1.X.Y` (TBD)|
 |`dashboard`|`main`|`v1.X.Y` (TBD)|
-|`anomaly\_detection`|`fall26`|`v1.X.Y` (TBD)|
+|`anomaly_detection`|`fall26`|`v1.X.Y` (TBD)|
 
 ### 0.X.Y (classic, frozen)
 
 |Repository|Reference point|
 |-|-|
 |`ai-navigation`|`main` before the MOLA merge (final `v0.X.Y` tag, TBD)|
-|`docker\_files`|`main` before the MOLA merge (final `v0.X.Y` tag, TBD)|
+|`docker_files`|`main` before the MOLA merge (final `v0.X.Y` tag, TBD)|
 |`ui`|`main` before the MOLA merge (final `v0.X.Y` tag, TBD)|
 
 ### Shared interface contract
@@ -95,10 +95,10 @@ Changing any of these requires a MINOR bump in every repository that uses it, fl
 
 |Interface|Used by|
 |-|-|
-|`anomaly\_msg/msg/AnomalyMsg` on `/ai\_anomaly\_logging`|navigation, UI, dashboard, anomaly detection|
+|`anomaly_msg/msg/AnomalyMsg` on `/ai_anomaly_logging`|navigation, UI, dashboard, anomaly detection|
 |`/aad/alerts`, `/aad/decisions`|anomaly detection, dashboard|
-|`/gps\_request`, `/gps\_send`, `/gps\_global\_path`|navigation, UI|
-|`/eta`, `/eta\_percentage`|navigation, UI, dashboard|
+|`/gps_request`, `/gps_send`, `/gps_global_path`|navigation, UI|
+|`/eta`, `/eta_percentage`|navigation, UI, dashboard|
 |ROSBridge on port `9090`|UI, dashboard|
 
 \---
@@ -107,12 +107,12 @@ Changing any of these requires a MINOR bump in every repository that uses it, fl
 
 |Area|0.X.Y (classic)|1.X.Y (MOLA)|
 |-|-|-|
-|Localization|`lidar\_localization\_ros2`|MOLA LiDAR localization with relocalization and a pose relay for the navigation stack|
-|Mapping|Previous map workflow|MOLA mapping (loop closure, leveling, georeferencing); `mola\_sm\_loop\_closure`|
-|Backend image|No MOLA packages|`ros-jazzy-mola-\*`, `ros-jazzy-gtsam`, `ros-jazzy-mp2p-icp`, `ros-jazzy-mrpt-\*`, `mola\_sm\_loop\_closure`|
+|Localization|`lidar_localization_ros2`|MOLA LiDAR localization with relocalization and a pose relay for the navigation stack|
+|Mapping|Previous map workflow|MOLA mapping (loop closure, leveling, georeferencing); `mola_sm_loop_closure`|
+|Backend image|No MOLA packages|`ros-jazzy-mola-\*`, `ros-jazzy-gtsam`, `ros-jazzy-mp2p-icp`, `ros-jazzy-mrpt-\*`, `mola_sm_loop_closure`|
 |Map and config files|Classic map set|MOLA metric maps and calibration files (downloaded into `/maps` during image build)|
-|Launch / RViz|Classic localization launch files|`mola\_mapper.launch.py`, `mola\_localization.rviz`, optional `zed\_single.launch.py`|
-|Health reporting|Not applicable|`mola\_diagnostics` messages (ICP quality, dropped-frame ratio, active state) on `/ai\_anomaly\_logging`|
+|Launch / RViz|Classic localization launch files|`mola_mapper.launch.py`, `mola_localization.rviz`, optional `zed_single.launch.py`|
+|Health reporting|Not applicable|`mola_diagnostics` messages (ICP quality, dropped-frame ratio, active state) on `/ai_anomaly_logging`|
 |Optional ZED odometry|Not applicable|Developmental input to MOLA state estimation|
 
 \---
@@ -123,10 +123,10 @@ Replace branch names with tags once releases are cut.
 
 ```bash
 # Active (1.X.Y)
-git -C \~/dev\_ws/src/ai-navigation     checkout mola\_main\_sum26
-git -C \~/docker\_files                 checkout fall26-bag\_file\_ui
-git -C \~/ui                           checkout mola\_main\_sum26
-git -C \~/dev\_ws/src/anomaly\_detection checkout fall26
+git -C \~/dev_ws/src/ai-navigation     checkout mola_main_sum26
+git -C \~/docker_files                 checkout fall26-bag_file_ui
+git -C \~/ui                           checkout mola_main_sum26
+git -C \~/dev_ws/src/anomaly_detection checkout fall26
 ```
 
 Afterwards:
@@ -145,7 +145,7 @@ To reproduce classic behavior only, check out the final `v0.X.Y` tag (or `releas
 1. Confirm all repositories pass their checks and share the same MAJOR.MINOR.
 2. Update the compatibility matrix in this file.
 3. Tag each repository: `git tag -a vX.Y.Z -m "<summary>"` and push the tag.
-4. Tag the suite: `suite-vX.Y.Z` on `docker\_files`, listing per-repository tags in the release notes.
+4. Tag the suite: `suite-vX.Y.Z` on `docker_files`, listing per-repository tags in the release notes.
 5. Record field-test status (stationary check, offline route inspection, or driven route) in the release notes so that "developmental" and "validated" features are distinguishable.
 
 \---
@@ -155,4 +155,3 @@ To reproduce classic behavior only, check out the final `v0.X.Y` tag (or `releas
 * The `0.X.Y` series receives no new features or fixes.
 * Existing code is preserved under the final `v0.X.Y` tag and the `release/0.x` branch.
 * All new features, fixes, and releases are `1.X.Y`.
-
